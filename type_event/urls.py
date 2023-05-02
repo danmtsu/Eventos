@@ -18,11 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import HomePageView
+from .views import HomePageView, logout_view
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('',HomePageView.as_view(), name='home'),
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('eventos/', include('eventos.urls'))
-    ,path('cliente/',include('cliente.urls'))
+    ,path('cliente/',include('cliente.urls')),
+
+    # outras rotas
+        path('logout/', logout_view, name='logout_view'),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

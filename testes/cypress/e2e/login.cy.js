@@ -1,3 +1,13 @@
+Cypress.Commands.add('loginUsuario',(username,senha)=>{
+  cy.visit('http://127.0.0.1:8000/')
+  cy.get('input[name="username"]').type(username)
+  cy.intercept('POST','http://127.0.0.1:8000/users/login').as('login')
+  cy.get('input[value="LOGAR"]').click({force:true}).wait('@login')
+  cy.contains('Username ou senha inválidos.').should('be.visible')
+  cy.get('input[name="senha"]').type(senha)
+  cy.get('input[value="LOGAR"]').dblclick().wait('@login')
+})
+
 describe('Login Verify', () => {
   it('login-verificando-componentes', () => {
     cy.visit('http://127.0.0.1:8000/')
@@ -18,6 +28,9 @@ describe('Login Verify', () => {
     cy.get('input[name="senha"]').type('1234')
     cy.get('input[value="LOGAR"]').dblclick().wait('@login')
     cy.contains('Username ou senha inválidos.').should('be.visible')
+  })
+  it('login_válido',()=>{
+    cy.loginUsuario('Lima','Unlock$12').wait(2000)
   })
 
 })

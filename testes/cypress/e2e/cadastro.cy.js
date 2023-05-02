@@ -28,6 +28,10 @@ describe('cadastro verify',()=>{
         cy.contains("A senha é fraquinha: ['Esta senha é muito comum.']").should('be.visible')
     })
     it("Cadastro_email_repetido",()=>{
+        it("cadastro_usuario_certo",()=>{
+            cy.cadastrarUsuario(url,"Lima",'teste@teste.com','Unlock$12')
+
+        })
         cy.cadastrarUsuario(url,"Diva",'teste@teste.com','Unlock$12')
         cy.contains('email já cadastrado').should('be.visible')
 

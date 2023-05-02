@@ -38,10 +38,17 @@
                     </ul>
                 </li>
             </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  {% csrf_token %}
+                  <a href="{% url 'logout_view' %}" class="nav-link me-3 btn btn-outline-danger">Logout</a>
+                </li>
+              </ul>
+
             </div>
         </div>
     </nav>
-
+    
     <div style="min-height: 60vh">
         {% block 'conteudo' %}
 
