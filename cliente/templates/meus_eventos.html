@@ -1,0 +1,35 @@
+{% extends "bases/base_evento.html" %}
+{% load static %}
+
+
+{% block 'conteudo' %}
+
+<div class="container">
+    <br>
+    <br>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Logo</th>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Início</th>
+                <th>Término</th>
+                <th>Link de inscrição</th>
+            </tr>
+        {%for evento in eventos %}
+        <tr class="{% cycle 'linha' 'linha2' %}">
+            <td width="10%"><a href="{% url 'participantes_evento' evento.id %}"><img width="75%" src="/media/{{evento.logo}}"></a></td>
+            <td>{{evento.nome}}</td>
+            <td>{{evento.descricao}}</td>
+            <hr>
+            <td>{{evento.data_inicio}} até </td>
+            <td>{{evento.data_termino}}</td>
+            <td><a href="http://127.0.0.1:8000/eventos/inscrever_evento/{{evento.id}}/">Inscrição</a></td>
+        </tr>
+        {%endfor%}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
